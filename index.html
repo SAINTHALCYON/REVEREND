@@ -436,8 +436,8 @@ MAIN PAGE
 
 <!-- ===== AUDIO ===== -->
 
-<audio id="clickSound" preload="auto">
-<source src="gunshot.mp3" type="audio/mpeg">
+<audio id="gunshot" preload="auto">
+<source src="gunshot.wav" type="audio/wav">
 </audio>
 
 <!-- ===== SCRIPT ===== -->
@@ -445,6 +445,7 @@ MAIN PAGE
 <script>
 
 const audio = document.getElementById("audio");
+const gun = document.getElementById("gunshot");
 
 /* ===== MUSIC PLAYER ===== */
 
@@ -452,15 +453,16 @@ function toggleMusic() {
   audio.paused ? audio.play() : audio.pause();
 }
 
-/* ===== FAST GUNSHOT SOUND ===== */
+/* ===== FAST GUNSHOT CLICK ===== */
 
 document.addEventListener("mousedown", () => {
 
-  const gun = new Audio("gunshot.mp3");
+  gun.pause();
+  gun.currentTime = 0;
 
-  gun.volume = 0.25;
-  gun,playbackRate = 1.8;
-  
+  gun.playbackRate = 3.0;
+  gun.volume = 0.2;
+
   gun.play();
 
   document.body.style.transform = "translateX(4px)";
@@ -472,6 +474,5 @@ document.addEventListener("mousedown", () => {
 });
 
 </script>
-
 </body>
 </html>
