@@ -447,7 +447,6 @@ MAIN PAGE
 <script>
 
 const audio = document.getElementById("audio");
-const clickSound = document.getElementById("clickSound");
 
 /* ===== MUSIC PLAYER ===== */
 
@@ -455,13 +454,14 @@ function toggleMusic() {
   audio.paused ? audio.play() : audio.pause();
 }
 
-/* ===== GUNSHOT ON EVERY CLICK ===== */
+/* ===== FAST GUNSHOT SOUND ===== */
 
 document.addEventListener("mousedown", () => {
 
-  clickSound.currentTime = 0;
-  clickSound.volume = 0.25;
-  clickSound.play();
+  const gun = new Audio("gunshot.mp3");
+
+  gun.volume = 0.25;
+  gun.play();
 
   document.body.style.transform = "translateX(4px)";
 
