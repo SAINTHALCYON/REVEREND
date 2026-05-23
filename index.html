@@ -345,12 +345,10 @@ AND MEDIA FIXATION WHICH IS SNCA.<br><br>
 
 THIS WEBSITE MAY CONTAIN MATURE THEMES,
 DISTURBING SUBJECT MATTER, NSFW CONTENT,
-AND OTHER MATERIAL UNSUITABLE FOR SOME AUDIENCES.<br><br>
-
+AND OTHER MATERIAL UNSUITABLE FOR SOME AUDIENCES.<br>
 VIEWER DISCRETION IS ADVISED.<br><br>
 
-not that i give a shit
-
+<span id="typing"></span>
 </div>
 
 <div class="divider">
@@ -523,6 +521,41 @@ document.addEventListener("mousedown", () => {
   }, 50);
 
 });
+
+/* ===== DELAYED TYPING TEXT ===== */
+
+const text = "not that i give a shit";
+const typing = document.getElementById("typing");
+
+let i = 0;
+
+setTimeout(() => {
+
+  const interval = setInterval(() => {
+
+    typing.innerHTML =
+      text.substring(0, i) +
+      '<span style="opacity:0.5">...</span>';
+
+    i++;
+
+    if (i > text.length) {
+
+      clearInterval(interval);
+
+      setInterval(() => {
+
+        typing.innerHTML =
+          text +
+          (typing.innerHTML.endsWith("...") ? "" : "...");
+
+      }, 500);
+
+    }
+
+  }, 80);
+
+}, 2000);
 
 </script>
 </body>
