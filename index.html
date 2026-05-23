@@ -168,6 +168,67 @@ body::before {
   max-width: 90%;
 }
 
+  /* ===== STATUS BOX ===== */
+
+.statusbox {
+  background: #111;
+  color: white;
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+.status-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-icon img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid #300;
+}
+
+.status-title {
+  color: #ff4d4d;
+  margin-bottom: 6px;
+  text-shadow: 0 0 4px red;
+}
+
+.status-message {
+  line-height: 1.7;
+  color: #ddd;
+}
+
+/* ===== UPDATE CARDS ===== */
+
+.updates-wrap {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.update-card {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  color: black;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  transition: 0.2s;
+}
+
+.update-card:hover {
+  transform: translateX(4px);
+}
+
+.update-time {
+  color: darkred;
+  margin-bottom: 6px;
+}
+
 /* ===== STAMPS ===== */
 
 #stamps {
@@ -355,12 +416,49 @@ VIEWER DISCRETION IS ADVISED.<br><br>
 <img src="BAND.jpg">
 </div>
 
-<div class="box">
+<!-- ===== STATUS BOX ===== -->
 
-UPDATE LOG<br><br>
+<div class="box statusbox">
 
-23/05/2026 — NEW WEBSITE FOR THE FOURTH TIME<br>
-[7.46.A.M] — IM SO FUCKING TIRED
+<div class="status-top">
+
+<div class="status-icon">
+<img src="emoji.gif">
+</div>
+
+<div class="status-text">
+
+<div class="status-title">
+CURRENT STATUS
+</div>
+
+<div class="status-message">
+so tired nd tear keeo falling out my eyes</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== UPDATES ===== -->
+
+<div class="updates-wrap">
+
+<div class="update-card">
+<div class="update-time">[05/23/2026]</div>
+NEW WEBSITE FOR THE FOURTH TIME
+</div>
+
+<div class="update-card">
+<div class="update-time">[07:46.AM]</div>
+REWORKED STAMPS AND NAVIGATION 
+</div>
+
+<div class="update-card">
+<div class="update-time">[08:12.AM]</div>
+ADDED GUNSHOT CLICK SOUNDS
+</div>
 
 </div>
 
