@@ -23,6 +23,29 @@ body {
   --red-main: #8b0000;
   --red-light: #c40000;
   --white: #f5f5f5;
+
+  <audio id="clickSound" preload="auto">
+  <source src="gunshot.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const clickSound = document.getElementById("clickSound");
+
+/* PLAY SOUND ON EVERY LINK CLICK */
+
+document.querySelectorAll("a, button").forEach(element => {
+
+  element.addEventListener("click", () => {
+
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+  });
+
+});
+
+</script>
 }
 
 /* ===== PAGE ===== */
