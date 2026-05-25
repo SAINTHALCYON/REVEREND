@@ -932,10 +932,10 @@ window.addEventListener("load", () => {
   gun.load();
 });
 </script>
-<!-- ===== SCRIPT ===== -->
   <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getFirestore,
@@ -944,64 +944,85 @@ import {
   onSnapshot,
   query,
   orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
   getAuth,
   signInAnonymously
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    const firebaseConfig = {
-  apiKey: "AIzaSyAn9ZE0gwwT_yGuSLKQDgta9PVJKAZEB_I",
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* ===== FIREBASE ===== */
+
+const firebaseConfig = {
+
+  apiKey: "YOUR_API_KEY",
   authDomain: "reverend-38f43.firebaseapp.com",
-  databaseURL: "https://reverend-38f43-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "reverend-38f43",
   storageBucket: "reverend-38f43.firebasestorage.app",
   messagingSenderId: "451665096761",
-  appId: "1:451665096761:web:add05192d153a984725de8",
-  measurementId: "G-4QSK6FMJGC"
+  appId: "1:451665096761:web:add05192d153a984725de8"
+
 };
-    const app = initializeApp(firebaseConfig);
+
+const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
 const auth = getAuth(app);
 
 signInAnonymously(auth);
-  </script>
 
-<script>
+/* ===== AUDIO ===== */
 
 const audio = document.getElementById("audio");
 const gun = document.getElementById("gunshot");
 
+window.addEventListener("load", () => {
+  gun.load();
+});
+
 /* ===== MUSIC PLAYER ===== */
 
-function toggleMusic() {
-  audio.paused ? audio.play() : audio.pause();
-}
-/* ===== FAST GUNSHOT CLICK ===== */
+window.toggleMusic = function () {
+
+  audio.paused
+    ? audio.play()
+    : audio.pause();
+
+};
+
+/* ===== GUNSHOT ===== */
 
 document.addEventListener("mousedown", () => {
 
   gun.currentTime = 0;
 
   gun.volume = 0.2;
-  gun.playbackRate = 3.0;
+
+  gun.playbackRate = 3;
 
   gun.play().catch(() => {});
 
-  document.body.style.transform = "translateX(4px)";
+  document.body.style.transform =
+    "translateX(4px)";
 
   setTimeout(() => {
-    document.body.style.transform = "translateX(0px)";
+
+    document.body.style.transform =
+      "translateX(0px)";
+
   }, 50);
 
 });
 
-/* ===== DELAYED TYPING TEXT ===== */
+/* ===== TYPING ===== */
 
 const text = "not that i give a shit";
-const typing = document.getElementById("typing");
+
+const typing =
+  document.getElementById("typing");
 
 let i = 0;
 
@@ -1023,7 +1044,9 @@ setTimeout(() => {
 
         typing.innerHTML =
           text +
-          (typing.innerHTML.endsWith("...") ? "" : "...");
+          (typing.innerHTML.endsWith("...")
+            ? ""
+            : "...");
 
       }, 500);
 
@@ -1035,39 +1058,13 @@ setTimeout(() => {
 
 /* ===== CHATBOX ===== */
 
-const chatInput = document.getElementById("chatInput");
-const messages = document.getElementById("chat-messages");
+const chatInput =
+  document.getElementById("chatInput");
 
-/* ADD GIF EMOJIS */
+const messages =
+  document.getElementById("chat-messages");
 
-function addEmoji(emoji) {
-
-  chatInput.value += " " + emoji;
-}
-  if (!localStorage.getItem("username")) {
-
-  alert(
-    "WARNING:\nUsername can only be set once."
-  );
-
-  const username = prompt(
-    "ENTER USERNAME"
-  );
-
-  localStorage.setItem(
-    "username",
-    username
-  );
-
-  }
-<script>
-
-/* ===== CHATBOX ===== */
-
-const chatInput = document.getElementById("chatInput");
-const messages = document.getElementById("chat-messages");
-
-/* USERNAME SETUP */
+/* USERNAME */
 
 if (!localStorage.getItem("username")) {
 
@@ -1075,7 +1072,8 @@ if (!localStorage.getItem("username")) {
     "WARNING:\nUsername can only be set once."
   );
 
-  const username = prompt("ENTER USERNAME");
+  const username =
+    prompt("ENTER USERNAME");
 
   localStorage.setItem(
     "username",
@@ -1084,81 +1082,13 @@ if (!localStorage.getItem("username")) {
 
 }
 
-/* ADD GIF EMOJIS */
+/* EMOJIS */
 
-function addEmoji(emoji) {
+window.addEmoji = function (emoji) {
 
   chatInput.value += " " + emoji;
 
-}
-
-/* LOAD MESSAGES */
-
-const q = query(
-  collection(db, "messages"),
-  orderBy("time")
-);
-
-onSnapshot(q, (snapshot) => {
-
-  messages.innerHTML = "";
-
-  snapshot.forEach((doc) => {
-
-    const data = doc.data();
-
-    const div = document.createElement("div");
-
-    div.className = "chat-message";
-
-    div.innerHTML = `
-
-      <img src="${data.pfp}" class="chat-pfp">
-
-      <div class="chat-bubble">
-
-        <div class="chat-user">
-          ${data.username}
-        </div>
-
-        ${convertEmojis(data.text)}
-
-      </div>
-
-    `;
-
-    messages.appendChild(div);
-
-  });
-
-  messages.scrollTop = messages.scrollHeight;
-
-});
-
-/* SEND MESSAGE */
-
-async function sendMessage() {
-
-  if (!chatInput.value.trim()) return;
-
-  await addDoc(collection(db, "messages"), {
-
-    username:
-      localStorage.getItem("username") || "ANON",
-
-    pfp:
-      localStorage.getItem("pfp")
-      || "assets/images/defaultpfp.png",
-
-    text: chatInput.value,
-
-    time: Date.now()
-
-  });
-
-  chatInput.value = "";
-
-}
+};
 
 /* CONVERT EMOJIS */
 
@@ -1183,17 +1113,97 @@ function convertEmojis(text) {
 
 }
 
-/* ENTER KEY */
+/* LOAD MESSAGES */
 
-chatInput.addEventListener("keypress", (e) => {
+const q = query(
+  collection(db, "messages"),
+  orderBy("time")
+);
 
-  if (e.key === "Enter") {
+onSnapshot(q, (snapshot) => {
 
-    sendMessage();
+  messages.innerHTML = "";
 
-  }
+  snapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    const div =
+      document.createElement("div");
+
+    div.className = "chat-message";
+
+    div.innerHTML = `
+
+      <img src="${data.pfp}"
+      class="chat-pfp">
+
+      <div class="chat-bubble">
+
+        <div class="chat-user">
+          ${data.username}
+        </div>
+
+        ${convertEmojis(data.text)}
+
+      </div>
+
+    `;
+
+    messages.appendChild(div);
+
+  });
+
+  messages.scrollTop =
+    messages.scrollHeight;
 
 });
-  (/script)
+
+/* SEND MESSAGE */
+
+window.sendMessage = async function () {
+
+  if (!chatInput.value.trim()) return;
+
+  await addDoc(
+    collection(db, "messages"),
+    {
+
+      username:
+        localStorage.getItem("username")
+        || "ANON",
+
+      pfp:
+        localStorage.getItem("pfp")
+        || "assets/images/defaultpfp.png",
+
+      text: chatInput.value,
+
+      time: Date.now()
+
+    }
+  );
+
+  chatInput.value = "";
+
+};
+
+/* ENTER KEY */
+
+chatInput.addEventListener(
+  "keypress",
+  (e) => {
+
+    if (e.key === "Enter") {
+
+      sendMessage();
+
+    }
+
+  }
+);
+
+  </script>
+            
 </body>
 </html>
