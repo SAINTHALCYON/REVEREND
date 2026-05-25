@@ -459,34 +459,20 @@ body::before {
 ::-webkit-scrollbar-thumb {
   background: #600;
 }
-  /* ===== MOBILE FIX ===== */
+/* ===== MOBILE FIX ===== */
 
 @media (max-width: 900px) {
 
+  body {
+    overflow-x: auto;
+  }
+
   #page {
-    width: 100%;
+    width: 1000px;
     margin: 0;
   }
 
-  #main {
-    grid-template-columns: 1fr;
-  }
-
-  #left,
-  #right,
-  #center {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-  }
-
-  #header {
-    height: auto;
-  }
-
-  #header img {
-    height: auto;
-  }
+}
 
   .linkme-box {
     width: 100%;
@@ -663,7 +649,7 @@ body::before {
 
 <div id="chatbox">
 
-  <!-- TOP BAR -->
+  <!-- HEADER -->
 
   <div class="chat-header">
     MESSAGE BOARD
@@ -671,27 +657,20 @@ body::before {
 
   <!-- MESSAGES -->
 
-  <div id="chat-messages">
-
-    <div class="chat-message">
-
-      <img src="assets/images/defaultpfp.jpg" class="chat-pfp">
-
-
-
-  
-
-  </div>
+  <div id="chat-messages"></div>
 
   <!-- EMOJIS -->
 
   <div class="emoji-bar">
 
-    <img src="assets/gifs/ANGRY.gif" onclick="addEmoji(':ANGRY:')">
+    <img src="assets/gifs/ANGRY.gif"
+    onclick="addEmoji(':ANGRY:')">
 
-    <img src="assets/gifs/LOVE.gif" onclick="addEmoji(':LOVE:')">
+    <img src="assets/gifs/LOVE.gif"
+    onclick="addEmoji(':LOVE:')">
 
-    <img src="assets/gifs/LOL.gif" onclick="addEmoji(':LOL:')">
+    <img src="assets/gifs/LOL.gif"
+    onclick="addEmoji(':LOL:')">
 
   </div>
 
