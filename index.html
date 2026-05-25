@@ -402,14 +402,25 @@ body::before {
 .border-wrap {
   position: relative;
   padding: 10px;
-  border: 8px solid transparent;
-
-  border-image:
-    url("assets/images/DONOTCROSS.png")
-    16 round;
-    
   background: #0a0a0a;
+  border: 2px solid #400;
 }
+
+.border-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  pointer-events: none;
+  background: url("assets/images/DONOTCROSS.png") repeat;
+  background-size: 80px;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.border-wrap > * {
+  position: relative;
+  z-index: 2;
+  }
 
 /* BUTTON */
 
@@ -598,40 +609,6 @@ NOW PLAYING: HATE
 
 </div>
 
-</div>
-  <!-- LINK ME BOX -->
-
-<div class="linkme-box">
-
-  <!-- STICKER -->
-
-  <img src="assets/images/RAZOR.webp" class="link-sticker">
-
-  <!-- TITLE -->
-
-  <div class="link-title" id="linkTitle">
-    LINK MY BUTTON
-  </div>
-
-  <!-- BORDER WRAP -->
-
-  <div class="border-wrap">
-
-    <!-- BUTTON -->
-
-    <a href="https://sainthalcyon.github.io/REVEREND/index.html" target="_blank">
-      <img src="assets/gifs/REVEREND.gif" class="site-button">
-    </a>
-
-    <!-- CODE -->
-
-    <textarea readonly>
-<a href="https://sainthalcyon.github.io/REVEREND/index.html">
-<img src="https://sainthalcyon.github.io/REVEREND/assets/gifs/REVEREND.gif">
-</a>
-    </textarea>
-
-  </div>
 
 </div>
 
@@ -670,7 +647,40 @@ MAIN PAGE
 &nbsp;&nbsp;&nbsp;&nbsp; └── <a href="about.html">ABOUT ME</a>
 
 </div>
+  <!-- LINK ME BOX -->
 
+<div class="linkme-box">
+
+  <!-- STICKER -->
+
+  <img src="assets/images/RAZOR.webp" class="link-sticker">
+
+  <!-- TITLE -->
+
+  <div class="link-title" id="linkTitle">
+    LINK MY BUTTON
+  </div>
+
+  <!-- BORDER WRAP -->
+
+  <div class="border-wrap">
+
+    <!-- BUTTON -->
+
+    <a href="https://sainthalcyon.github.io/REVEREND/index.html" target="_blank">
+      <img src="assets/gifs/REVEREND.gif" class="site-button">
+    </a>
+
+    <!-- CODE -->
+
+    <textarea readonly>
+<a href="https://sainthalcyon.github.io/REVEREND/index.html">
+<img src="https://sainthalcyon.github.io/REVEREND/assets/gifs/REVEREND.gif">
+</a>
+    </textarea>
+
+  </div>
+  
 </div>
 
 </div>
