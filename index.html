@@ -957,7 +957,7 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyAn9ZE0gwwT_yGuSLKQDgta9PVJKAZEB_I",
   authDomain: "reverend-38f43.firebaseapp.com",
   projectId: "reverend-38f43",
   storageBucket: "reverend-38f43.firebasestorage.app",
@@ -1097,21 +1097,21 @@ function convertEmojis(text) {
   return text
 
     .replaceAll(
-      ":skull:",
+      ":ANGRY:",
       '<img src="assets/gifs/ANGRY.gif" width="20">'
     )
 
     .replaceAll(
-      ":heart:",
+      ":LOVE:",
       '<img src="assets/gifs/LOVE.gif" width="20">'
     )
 
     .replaceAll(
-      ":blood:",
+      ":LOL:",
       '<img src="assets/gifs/LOL.gif" width="20">'
     );
 
-}
+    }
 
 /* LOAD MESSAGES */
 
@@ -1144,7 +1144,11 @@ onSnapshot(q, (snapshot) => {
           ${data.username}
         </div>
 
-        ${convertEmojis(data.text)}
+        ${convertEmojis(
+  data.text
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+)}
 
       </div>
 
@@ -1175,7 +1179,7 @@ window.sendMessage = async function () {
 
       pfp:
         localStorage.getItem("pfp")
-        || "assets/images/defaultpfp.png",
+        || "assets/images/defaultpfp.jpg",
 
       text: chatInput.value,
 
