@@ -731,11 +731,14 @@ MAIN PAGE
 </div>
 
 <!-- ===== AUDIO ===== -->
-
 <audio id="gunshot" preload="auto">
-<source src="assets/audios/gunshot.mp3" type="audio/mpeg">
+  <source src="assets/audios/gunshot.mp3" type="audio/mpeg">
 </audio>
-
+<script>
+window.addEventListener("load", () => {
+  gun.load();
+});
+</script>
 <!-- ===== SCRIPT ===== -->
 
 <script>
@@ -752,12 +755,12 @@ function toggleMusic() {
 
 document.addEventListener("mousedown", () => {
 
-  const shot = gun.cloneNode();
+  gun.currentTime = 0;
 
-  shot.volume = 0.2;
-  shot.playbackRate = 3.0;
+  gun.volume = 0.2;
+  gun.playbackRate = 3.0;
 
-  shot.play();
+  gun.play().catch(() => {});
 
   document.body.style.transform = "translateX(4px)";
 
