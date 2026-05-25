@@ -1067,7 +1067,7 @@ function addEmoji(emoji) {
 const chatInput = document.getElementById("chatInput");
 const messages = document.getElementById("chat-messages");
 
-/* ===== USERNAME SETUP ===== */
+/* USERNAME SETUP */
 
 if (!localStorage.getItem("username")) {
 
@@ -1084,7 +1084,7 @@ if (!localStorage.getItem("username")) {
 
 }
 
-/* ===== ADD CUSTOM GIF EMOJIS ===== */
+/* ADD GIF EMOJIS */
 
 function addEmoji(emoji) {
 
@@ -1092,30 +1092,7 @@ function addEmoji(emoji) {
 
 }
 
-/* ===== CONVERT EMOJIS ===== */
-
-function convertEmojis(text) {
-
-  return text
-
-    .replaceAll(
-      ":skull:",
-      '<img src="assets/gifs/ANGRY.gif" width="20">'
-    )
-
-    .replaceAll(
-      ":heart:",
-      '<img src="assets/gifs/LOVE.gif" width="20">'
-    )
-
-    .replaceAll(
-      ":blood:",
-      '<img src="assets/gifs/LOL.gif" width="20">'
-    );
-
-}
-
-/* ===== LOAD MESSAGES ===== */
+/* LOAD MESSAGES */
 
 const q = query(
   collection(db, "messages"),
@@ -1158,7 +1135,7 @@ onSnapshot(q, (snapshot) => {
 
 });
 
-/* ===== SEND MESSAGE ===== */
+/* SEND MESSAGE */
 
 async function sendMessage() {
 
@@ -1167,8 +1144,7 @@ async function sendMessage() {
   await addDoc(collection(db, "messages"), {
 
     username:
-      localStorage.getItem("username")
-      || "ANON",
+      localStorage.getItem("username") || "ANON",
 
     pfp:
       localStorage.getItem("pfp")
@@ -1184,7 +1160,30 @@ async function sendMessage() {
 
 }
 
-/* ===== ENTER KEY ===== */
+/* CONVERT EMOJIS */
+
+function convertEmojis(text) {
+
+  return text
+
+    .replaceAll(
+      ":skull:",
+      '<img src="assets/gifs/ANGRY.gif" width="20">'
+    )
+
+    .replaceAll(
+      ":heart:",
+      '<img src="assets/gifs/LOVE.gif" width="20">'
+    )
+
+    .replaceAll(
+      ":blood:",
+      '<img src="assets/gifs/LOL.gif" width="20">'
+    );
+
+}
+
+/* ENTER KEY */
 
 chatInput.addEventListener("keypress", (e) => {
 
@@ -1195,6 +1194,6 @@ chatInput.addEventListener("keypress", (e) => {
   }
 
 });
-</script>
+  (/script)
 </body>
 </html>
