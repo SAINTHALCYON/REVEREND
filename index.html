@@ -367,7 +367,8 @@ body::before {
 
 .linkme-box {
   position: relative;
-  width: 220px;
+  width: 100%;
+  box-sizing: border-box;
   background: #111;
   border: 2px solid #500;
   padding: 8px;
@@ -458,7 +459,50 @@ body::before {
 ::-webkit-scrollbar-thumb {
   background: #600;
 }
+  /* ===== MOBILE FIX ===== */
 
+@media (max-width: 900px) {
+
+  #page {
+    width: 100%;
+    margin: 0;
+  }
+
+  #main {
+    grid-template-columns: 1fr;
+  }
+
+  #left,
+  #right,
+  #center {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+  }
+
+  #header {
+    height: auto;
+  }
+
+  #header img {
+    height: auto;
+  }
+
+  .linkme-box {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+}
+.link-title {
+  text-align: center;
+  font-size: 9px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ff4d4d;
+  text-shadow: 0 0 4px red;
+}
 </style>
 </head>
 
@@ -760,29 +804,6 @@ setTimeout(() => {
 
 }, 2000);
 
-/* ===== HARD COLOR SWITCH ===== */
-const title = document.getElementById("linkTitle");
-
-const colors = [
-  "#ff0000",
-  "#ffffff",
-  "#8b0000",
-  "#ff4d4d"
-];
-
-let c = 0;
-
-setInterval(() => {
-
-  title.style.color = colors[c];
-
-  c++;
-
-  if (c >= colors.length) {
-    c = 0;
-  }
-
-}, 120);
 
 </script>
 </body>
