@@ -933,6 +933,41 @@ window.addEventListener("load", () => {
 });
 </script>
 <!-- ===== SCRIPT ===== -->
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+  getAuth,
+  signInAnonymously
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    const firebaseConfig = {
+  apiKey: "AIzaSyAn9ZE0gwwT_yGuSLKQDgta9PVJKAZEB_I",
+  authDomain: "reverend-38f43.firebaseapp.com",
+  databaseURL: "https://reverend-38f43-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "reverend-38f43",
+  storageBucket: "reverend-38f43.firebasestorage.app",
+  messagingSenderId: "451665096761",
+  appId: "1:451665096761:web:add05192d153a984725de8",
+  measurementId: "G-4QSK6FMJGC"
+};
+    const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+signInAnonymously(auth);
+  </script>
 
 <script>
 
@@ -1008,43 +1043,83 @@ const messages = document.getElementById("chat-messages");
 function addEmoji(emoji) {
 
   chatInput.value += " " + emoji;
-
 }
+  if (!localStorage.getItem("username")) {
 
-/* SEND MESSAGE */
+  alert(
+    "WARNING:\nUsername can only be set once."
+  );
 
-function sendMessage() {
+  const username = prompt(
+    "ENTER USERNAME"
+  );
+
+  localStorage.setItem(
+    "username",
+    username
+  );
+
+  }
+async function sendMessage() 
+const q = query(
+  collection(db, "messages"),
+  orderBy("time")
+);
+
+onSnapshot(q, (snapshot) => {
+
+  messages.innerHTML = "";
+
+  snapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    const div = document.createElement("div");
+
+    div.className = "chat-message";
+
+    div.innerHTML = `
+
+      <img src="${data.pfp}" class="chat-pfp">
+
+      <div class="chat-bubble">
+
+        <div class="chat-user">
+          ${data.username}
+        </div>
+
+        ${convertEmojis(data.text)}
+
+      </div>
+
+    `;
+
+    messages.appendChild(div);
+
+  });
+
+  messages.scrollTop = messages.scrollHeight;
+
+});{
 
   if (!chatInput.value.trim()) return;
 
-  const div = document.createElement("div");
+  await addDoc(collection(db, "messages"), {
 
-  div.className = "chat-message";
+    username: localStorage.getItem("username") || "ANON",
 
-  div.innerHTML = `
+    pfp: localStorage.getItem("pfp")
+      || "assets/images/defaultpfp.png",
 
-    <img src="assets/images/defaultpfp.png" class="chat-pfp">
+    text: chatInput.value,
 
-    <div class="chat-bubble">
+    time: Date.now()
 
-      <div class="chat-user">
-        YOU
-      </div>
-
-      ${convertEmojis(chatInput.value)}
-
-    </div>
-
-  `;
-
-  messages.appendChild(div);
-
-  messages.scrollTop = messages.scrollHeight;
+  });
 
   chatInput.value = "";
 
 }
-
 /* CONVERT EMOJI TEXT INTO GIFS */
 
 function convertEmojis(text) {
