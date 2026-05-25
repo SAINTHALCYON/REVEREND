@@ -503,6 +503,138 @@ body::before {
   color: #ff4d4d;
   text-shadow: 0 0 4px red;
 }
+  /* ===== CHATBOX ===== */
+
+#chatbox {
+  margin-top: 10px;
+  background: #111;
+  border: 2px solid #500;
+  color: white;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.chat-header {
+  background: linear-gradient(#400, #111);
+  padding: 8px;
+  text-align: center;
+  font-size: 9px;
+  border-bottom: 2px solid #300;
+  color: #ff4d4d;
+  text-shadow: 0 0 4px red;
+}
+
+/* MESSAGES */
+
+#chat-messages {
+  height: 250px;
+  overflow-y: auto;
+  padding: 8px;
+  background: #0b0b0b;
+}
+
+/* SINGLE MESSAGE */
+
+.chat-message {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+/* PFP */
+
+.chat-pfp {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border: 2px solid #500;
+  image-rendering: pixelated;
+}
+
+/* BUBBLE */
+
+.chat-bubble {
+  background: #1a1a1a;
+  border: 1px solid #400;
+  padding: 6px;
+  font-size: 8px;
+  line-height: 1.6;
+  max-width: 120px;
+  word-wrap: break-word;
+}
+
+/* USERNAME */
+
+.chat-user {
+  color: #ff4d4d;
+  margin-bottom: 4px;
+}
+
+/* INPUT AREA */
+
+.chat-input-wrap {
+  display: flex;
+  border-top: 2px solid #300;
+}
+
+/* INPUT */
+
+#chatInput {
+  flex: 1;
+  background: black;
+  border: none;
+  color: white;
+  padding: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  outline: none;
+}
+
+/* BUTTON */
+
+.chat-input-wrap button {
+  background: #600;
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 8px;
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* EMOJI BAR */
+
+.emoji-bar {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-top: 2px solid #300;
+  background: #151515;
+}
+
+/* CUSTOM GIF EMOJIS */
+
+.emoji-bar img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.emoji-bar img:hover {
+  transform: scale(1.1);
+}
+
+/* SCROLLBAR */
+
+#chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+  background: #600;
+    }
 </style>
 </head>
 
@@ -527,7 +659,68 @@ body::before {
 <div class="divider">
 <img src="assets/images/BAND.jpg" width="100%">
 </div>
+<!-- ===== CHATBOX ===== -->
 
+<div id="chatbox">
+
+  <!-- TOP BAR -->
+
+  <div class="chat-header">
+    MESSAGE BOARD
+  </div>
+
+  <!-- MESSAGES -->
+
+  <div id="chat-messages">
+
+    <div class="chat-message">
+
+      <img src="assets/images/defaultpfp.png" class="chat-pfp">
+
+      <div class="chat-bubble">
+
+        <div class="chat-user">
+          REVEREND
+        </div>
+
+        # text
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- EMOJIS -->
+
+  <div class="emoji-bar">
+
+    <img src="assets/emojis/skull.gif" onclick="addEmoji(':skull:')">
+
+    <img src="assets/emojis/heart.gif" onclick="addEmoji(':heart:')">
+
+    <img src="assets/emojis/blood.gif" onclick="addEmoji(':blood:')">
+
+  </div>
+
+  <!-- INPUT -->
+
+  <div class="chat-input-wrap">
+
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="type message..."
+      maxlength="120"
+    >
+
+    <button onclick="sendMessage()">
+      SEND
+    </button>
+
+  </div>
+
+</div>
 </div>
 
 <!-- ===== CENTER ===== -->
@@ -805,7 +998,85 @@ setTimeout(() => {
 
 }, 2000);
 
+/* ===== CHATBOX ===== */
 
+const chatInput = document.getElementById("chatInput");
+const messages = document.getElementById("chat-messages");
+
+/* ADD GIF EMOJIS */
+
+function addEmoji(emoji) {
+
+  chatInput.value += " " + emoji;
+
+}
+
+/* SEND MESSAGE */
+
+function sendMessage() {
+
+  if (!chatInput.value.trim()) return;
+
+  const div = document.createElement("div");
+
+  div.className = "chat-message";
+
+  div.innerHTML = `
+
+    <img src="assets/images/defaultpfp.png" class="chat-pfp">
+
+    <div class="chat-bubble">
+
+      <div class="chat-user">
+        YOU
+      </div>
+
+      ${convertEmojis(chatInput.value)}
+
+    </div>
+
+  `;
+
+  messages.appendChild(div);
+
+  messages.scrollTop = messages.scrollHeight;
+
+  chatInput.value = "";
+
+}
+
+/* CONVERT EMOJI TEXT INTO GIFS */
+
+function convertEmojis(text) {
+
+  return text
+
+    .replaceAll(
+      ":skull:",
+      '<img src="assets/emojis/skull.gif" width="20">'
+    )
+
+    .replaceAll(
+      ":heart:",
+      '<img src="assets/emojis/heart.gif" width="20">'
+    )
+
+    .replaceAll(
+      ":blood:",
+      '<img src="assets/emojis/blood.gif" width="20">'
+    );
+
+}
+
+/* ENTER KEY */
+
+chatInput.addEventListener("keypress", (e) => {
+
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+
+});
 </script>
 </body>
 </html>
