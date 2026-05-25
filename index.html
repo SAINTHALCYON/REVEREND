@@ -1060,7 +1060,63 @@ function addEmoji(emoji) {
   );
 
   }
-async function sendMessage() 
+<script>
+
+/* ===== CHATBOX ===== */
+
+const chatInput = document.getElementById("chatInput");
+const messages = document.getElementById("chat-messages");
+
+/* ===== USERNAME SETUP ===== */
+
+if (!localStorage.getItem("username")) {
+
+  alert(
+    "WARNING:\nUsername can only be set once."
+  );
+
+  const username = prompt("ENTER USERNAME");
+
+  localStorage.setItem(
+    "username",
+    username || "ANON"
+  );
+
+}
+
+/* ===== ADD CUSTOM GIF EMOJIS ===== */
+
+function addEmoji(emoji) {
+
+  chatInput.value += " " + emoji;
+
+}
+
+/* ===== CONVERT EMOJIS ===== */
+
+function convertEmojis(text) {
+
+  return text
+
+    .replaceAll(
+      ":skull:",
+      '<img src="assets/gifs/ANGRY.gif" width="20">'
+    )
+
+    .replaceAll(
+      ":heart:",
+      '<img src="assets/gifs/LOVE.gif" width="20">'
+    )
+
+    .replaceAll(
+      ":blood:",
+      '<img src="assets/gifs/LOL.gif" width="20">'
+    );
+
+}
+
+/* ===== LOAD MESSAGES ===== */
+
 const q = query(
   collection(db, "messages"),
   orderBy("time")
@@ -1100,15 +1156,22 @@ onSnapshot(q, (snapshot) => {
 
   messages.scrollTop = messages.scrollHeight;
 
-});{
+});
+
+/* ===== SEND MESSAGE ===== */
+
+async function sendMessage() {
 
   if (!chatInput.value.trim()) return;
 
   await addDoc(collection(db, "messages"), {
 
-    username: localStorage.getItem("username") || "ANON",
+    username:
+      localStorage.getItem("username")
+      || "ANON",
 
-    pfp: localStorage.getItem("pfp")
+    pfp:
+      localStorage.getItem("pfp")
       || "assets/images/defaultpfp.png",
 
     text: chatInput.value,
@@ -1120,35 +1183,15 @@ onSnapshot(q, (snapshot) => {
   chatInput.value = "";
 
 }
-/* CONVERT EMOJI TEXT INTO GIFS */
 
-function convertEmojis(text) {
-
-  return text
-
-    .replaceAll(
-      ":skull:",
-      '<img src="assets/gifs/ANGRY.gif" width="20">'
-    )
-
-    .replaceAll(
-      ":heart:",
-      '<img src="assets/gifs/LOVE.gif" width="20">'
-    )
-
-    .replaceAll(
-      ":blood:",
-      '<img src="assets/gifs/LOL.gif" width="20">'
-    );
-
-}
-
-/* ENTER KEY */
+/* ===== ENTER KEY ===== */
 
 chatInput.addEventListener("keypress", (e) => {
 
   if (e.key === "Enter") {
+
     sendMessage();
+
   }
 
 });
