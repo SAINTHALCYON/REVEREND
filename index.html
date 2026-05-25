@@ -748,18 +748,16 @@ const gun = document.getElementById("gunshot");
 function toggleMusic() {
   audio.paused ? audio.play() : audio.pause();
 }
-
 /* ===== FAST GUNSHOT CLICK ===== */
 
 document.addEventListener("mousedown", () => {
 
-  gun.pause();
-  gun.currentTime = 0;
+  const shot = gun.cloneNode();
 
-  gun.playbackRate = 3.0;
-  gun.volume = 0.2;
+  shot.volume = 0.2;
+  shot.playbackRate = 3.0;
 
-  gun.play();
+  shot.play();
 
   document.body.style.transform = "translateX(4px)";
 
