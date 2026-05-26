@@ -638,6 +638,63 @@ body::after{
 
   font-family:monospace;
 }
+    /* ===== STAMP AREA ===== */
+
+.stamp-area{
+    position:relative;
+
+    margin-top:22px;
+
+    padding:14px;
+
+    background:#080808;
+
+    border:2px solid #500;
+
+    min-height:170px;
+
+    overflow:hidden;
+}
+
+/* stamp grid */
+
+.stamp-grid{
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+}
+
+.stamp-grid img{
+    width:99px;
+    height:56px;
+
+    object-fit:cover;
+
+    image-rendering:pixelated;
+
+    border:1px solid #400;
+}
+
+/* overlapping corner image */
+
+.corner-stamp{
+    position:absolute;
+
+    right:-6px;
+    bottom:-6px;
+
+    width:120px;
+
+    opacity:0.95;
+
+    pointer-events:none;
+
+    transform:rotate(-6deg);
+}
 </style>
 </head>
 
@@ -852,6 +909,19 @@ discord
 <img src="assets/blinkies/blink3.gif">
 
 </div>
+            <div class="stamp-area">
+
+    <!-- overlapping image -->
+    <img src="assets/images/whatever.png" class="corner-stamp">
+
+    <!-- stamps -->
+    <div class="stamp-grid">
+
+        <img src="assets/stamps/stamp1.gif">
+    
+    </div>
+
+            </div>
             </div>
 
         </div>
