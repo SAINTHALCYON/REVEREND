@@ -464,7 +464,7 @@ body::after{
             <div class="box">
 
                 <div class="image-port">
-                    <img src="https://i.pinimg.com/736x/72/e8/c9/72e8c9d4e9fbd6b0f0713f9c7f6ef6d8.jpg">
+                    <img src="assets/images/PFP.jpg">
                 </div>
 
                 <div class="dropdown">
@@ -490,8 +490,8 @@ body::after{
                 </table>
 
                 <div class="mini-images">
-                    <img src="https://i.pinimg.com/736x/f4/7b/43/f47b43d9f33cb94f6c93232ece2b2045.jpg">
-                    <img src="https://i.pinimg.com/736x/82/76/52/827652c7d71d98809f4178d0e16f6c1d.jpg">
+                    <img src="assets/gifs/END.gif">
+                    <img src="assets/gifs/RRE.gif">
                 </div>
 
             </div>
@@ -544,7 +544,7 @@ body::after{
 <div class="box music-player">
 
     <div class="player-top">
-        <img src="YOUR-ALBUM-IMAGE.jpg">
+        <img src="assets/images/ALBUMCOVER.jpg">
 
         <div class="song-info">
             <div class="song-title">
@@ -575,6 +575,40 @@ body::after{
     </div>
 
 </div>
+<audio id="audio" src="assets/audios/FOREVER.mp3"></audio>
 
+<script>
+const audio = document.getElementById("audio");
+
+audio.loop = true;
+
+const playBtn = document.querySelectorAll(".controls button")[1];
+const prevBtn = document.querySelectorAll(".controls button")[0];
+const nextBtn = document.querySelectorAll(".controls button")[2];
+
+let playing = false;
+
+playBtn.addEventListener("click", () => {
+
+    if(!playing){
+        audio.play();
+        playBtn.innerHTML = "■";
+        playing = true;
+    } else {
+        audio.pause();
+        playBtn.innerHTML = "▶";
+        playing = false;
+    }
+
+});
+
+prevBtn.addEventListener("click", () => {
+    audio.currentTime = 0;
+});
+
+nextBtn.addEventListener("click", () => {
+    audio.currentTime = audio.duration;
+});
+</script>
 </body>
 </html>
