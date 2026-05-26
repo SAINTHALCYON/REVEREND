@@ -107,14 +107,15 @@ position:relative;
 .content{
     display:flex;
     height:calc(100% - 132px);
-    overflow:hidden; /* important: prevents parent from stealing scroll */
-}
 
-/* allow flex children to actually overflow */
-.middle, .left, .right{
-    min-height:0;
-}
+    background:#000;
+    color:#111;
 
+    padding:18px;
+    gap:16px;
+
+    overflow:hidden;
+}
 /* columns */
 
 .left{
@@ -221,10 +222,10 @@ position:relative;
     overflow-y:auto;
     overflow-x:hidden;
 
-    background:white;
-    color:#111;
+    background:#111;
+    color:#f5f5f5;
 
-    border:2px solid #bbb;
+    border:2px solid #500;
 
     padding:14px;
 
