@@ -579,6 +579,7 @@ body::after{
 
 <script>
 const audio = document.getElementById("audio");
+    audio.volume = 1;
 
 audio.loop = true;
 
@@ -591,7 +592,11 @@ let playing = false;
 playBtn.addEventListener("click", () => {
 
     if(!playing){
-        audio.play();
+        audio.play().then(() => {
+    console.log("playing");
+}).catch(err => {
+    console.log(err);
+});
         playBtn.innerHTML = "■";
         playing = true;
     } else {
