@@ -107,13 +107,12 @@ position:relative;
 .content{
     display:flex;
     height:calc(100% - 132px);
+    overflow:hidden; /* important: prevents parent from stealing scroll */
+}
 
-    background:#000;
-
-    color:#111;
-    padding:18px;
-    gap:16px;
-    overflow:auto;
+/* allow flex children to actually overflow */
+.middle, .left, .right{
+    min-height:0;
 }
 
 /* columns */
@@ -216,12 +215,12 @@ position:relative;
     line-height:1.2;
     overflow:auto;
 }
-    .scroll-note{
+.scroll-note{
     height:300px;
-
     overflow-y:auto;
     overflow-x:hidden;
-    }
+    padding-right:6px; 
+}
 
 .links{
     display:flex;
