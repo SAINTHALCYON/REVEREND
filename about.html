@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>retro layout</title>
+
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<style>
+*{
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#080808;
+    font-family:'VT323', monospace;
+    color:#f2f2f2;
+    overflow:hidden;
+}
+
+/* blurred bg */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1400&auto=format&fit=crop') center/cover;
+    filter:blur(8px) brightness(0.25);
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    z-index:-1;
+}
+
+/* main window */
+
+.window{
+    width:1150px;
+    height:760px;
+    background:#111;
+    border:4px solid #cfcfcf;
+    border-radius:28px;
+    overflow:hidden;
+
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+    0 0 0 2px #4b0000,
+    0 0 35px rgba(255,0,0,0.25);
+}
+
+/* top bar */
+
+.topbar{
+    height:58px;
+    background:#000;
+    border-bottom:2px solid #5a0000;
+    display:flex;
+    align-items:center;
+    padding:0 24px;
+    font-size:40px;
+    letter-spacing:2px;
+    color:white;
+}
+
+.topbar span{
+    margin-left:18px;
+}
+
+/* fake tabs */
+
+.tabs{
+    display:flex;
+    gap:22px;
+    background:#161616;
+    padding:18px 22px 0px;
+}
+
+.tab{
+    width:180px;
+    height:74px;
+    background:#f0f0f0;
+    color:#111;
+    border-radius:18px 18px 0 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+    border:2px solid #bbb;
+}
+
+/* content */
+
+.content{
+    display:flex;
+    height:calc(100% - 132px);
+    background:#dadada;
+    color:#111;
+    padding:18px;
+    gap:16px;
+    overflow:auto;
+}
+
+/* columns */
+
+.left{
+    width:310px;
+}
+
+.middle{
+    width:430px;
+}
+
+.right{
+    flex:1;
+}
+
+/* cards */
+
+.box{
+    background:#efefef;
+    border:2px solid #bcbcbc;
+    margin-bottom:14px;
+    padding:10px;
+}
+
+.title{
+    font-size:26px;
+    margin-bottom:10px;
+    color:#700000;
+    border-bottom:1px solid #c7c7c7;
+    padding-bottom:4px;
+}
+
+/* image ports */
+
+.image-port{
+    width:100%;
+    height:240px;
+    overflow:hidden;
+    border:2px solid #aaa;
+    margin-bottom:10px;
+}
+
+.image-port img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* dropdown */
+
+.dropdown{
+    width:100%;
+    background:#e5e5e5;
+    border:2px solid #b7b7b7;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    font-size:34px;
+}
+
+/* info */
+
+.info{
+    width:100%;
+    border-collapse:collapse;
+    font-size:30px;
+}
+
+.info td{
+    border-bottom:1px solid #ccc;
+    padding:8px 2px;
+}
+
+/* mini images */
+
+.mini-images{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+
+.mini-images img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border:2px solid #aaa;
+}
+
+/* note boxes */
+
+.note{
+    background:white;
+    border:2px solid #bbb;
+    padding:14px;
+    min-height:170px;
+    font-size:28px;
+    line-height:1.2;
+    overflow:auto;
+}
+
+.links{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.link-btn{
+    flex:1;
+    background:#e3e3e3;
+    border:2px solid #bbb;
+    text-align:center;
+    padding:8px;
+    font-size:30px;
+}
+
+/* ascii area */
+
+.ascii{
+    font-size:19px;
+    line-height:1;
+    white-space:pre;
+    text-align:center;
+    padding-top:20px;
+    color:#500000;
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#600000;
+}
+
+::-webkit-scrollbar-track{
+    background:#1b1b1b;
+}
+/* music player */
+
+.music-player{
+    background:#090909;
+    border:2px solid #5f0000;
+    color:white;
+    padding:14px;
+}
+
+.player-top{
+    display:flex;
+    gap:14px;
+    align-items:center;
+}
+
+.player-top img{
+    width:95px;
+    height:95px;
+    object-fit:cover;
+    border:2px solid #700000;
+}
+
+.song-info{
+    flex:1;
+}
+
+.song-title{
+    font-size:32px;
+    color:#ff4b4b;
+    margin-bottom:4px;
+}
+
+.song-artist{
+    font-size:24px;
+    opacity:0.7;
+    margin-bottom:12px;
+}
+
+.progress{
+    width:100%;
+    height:8px;
+    background:#1b1b1b;
+    border:1px solid #700000;
+    position:relative;
+    margin-bottom:10px;
+}
+
+.progress::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:55%;
+    height:100%;
+    background:#a80000;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    margin-top:8px;
+}
+
+.controls button{
+    background:#111;
+    border:2px solid #700000;
+    color:white;
+
+    width:42px;
+    height:42px;
+
+    font-size:20px;
+    font-family:'VT323', monospace;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.controls button:hover{
+    background:#700000;
+    transform:translateY(-2px);
+}
+/* CRT scanlines */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+
+    pointer-events:none;
+    z-index:99999;
+
+    mix-blend-mode:soft-light;
+}
+/* floating top banner */
+.floating-banner{
+    position:absolute;
+
+    left:50%;
+    top:calc(50% - 470px);
+
+    transform:translateX(-50%);
+
+    width:1150px;
+    height:90px;
+
+    background:#000;
+
+    border:2px solid #700000;
+
+    overflow:hidden;
+
+    z-index:100;
+}
+.floating-banner img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+<div class="floating-banner">
+
+    <img src="assets/images/BGT.jpg">
+
+</div>
+<div class="window">
+
+    <div class="topbar">
+        ▶
+        <span>ABOUT ME</span>
+    </div>
+
+    <div class="tabs">
+        <div class="tab">home</div>
+        <div class="tab">about</div>
+    </div>
+
+    <div class="content">
+
+        <!-- LEFT -->
+
+        <div class="left">
+
+            <div class="box">
+
+                <div class="image-port">
+                    <img src="https://i.pinimg.com/736x/72/e8/c9/72e8c9d4e9fbd6b0f0713f9c7f6ef6d8.jpg">
+                </div>
+
+                <div class="dropdown">
+                    MLYST
+                    <span></span>
+                </div>
+
+                <table class="info">
+                    <tr>
+                        <td>she / her</td>
+                        <td>17</td>
+                    </tr>
+
+                    <tr>
+                        <td>byi</td>
+                        <td>im loud n retarded</td>
+                    </tr>
+
+                    <tr>
+                        <td>dni</td>
+                        <td>antis..</td>
+                    </tr>
+                </table>
+
+                <div class="mini-images">
+                    <img src="https://i.pinimg.com/736x/f4/7b/43/f47b43d9f33cb94f6c93232ece2b2045.jpg">
+                    <img src="https://i.pinimg.com/736x/82/76/52/827652c7d71d98809f4178d0e16f6c1d.jpg">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MIDDLE -->
+
+        <div class="middle">
+
+            <div class="box">
+                <div class="title">notes.txt</div>
+
+                <div class="note">
+                    hi, i'm just someone who wants more freedom on what she can write and post..<br><br>
+                    my blogs might come off as disordered and disturbing here, sorry ..
+                </div>
+
+                <div class="links">
+                    <div class="link-btn">link 1</div>
+                    <div class="link-btn">link 2</div>
+                    <div class="link-btn">link 3</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="title">interests.txt</div>
+
+                <div class="note">
+                    things i like ;<br>
+                    drawing<br>
+                    coding<br>
+                    industrial, nu metal and pop ballad music<br>
+                    tcc<br>
+                    neon genesis evangelion<br>
+                    needy streamer overload
+                </div>
+            </div>
+
+            <div class="box" style="text-align:center; font-size:32px;">
+                i like eric if you didn't know
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="right">
+
+<div class="box music-player">
+
+    <div class="player-top">
+        <img src="YOUR-ALBUM-IMAGE.jpg">
+
+        <div class="song-info">
+            <div class="song-title">
+                forever
+            </div>
+
+            <div class="song-artist">
+                the little dippers
+            </div>
+
+            <div class="progress"></div>
+
+            <div class="controls">
+
+    <button>⏮</button>
+
+    <button>❚❚</button>
+
+    <button>⏭</button>
+</div>
+            </div>
+        </div>
+    </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
