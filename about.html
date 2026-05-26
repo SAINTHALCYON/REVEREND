@@ -216,6 +216,12 @@ position:relative;
     line-height:1.2;
     overflow:auto;
 }
+    .scroll-note{
+    height:300px;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+    }
 
 .links{
     display:flex;
@@ -669,15 +675,16 @@ body::after{
 }
 
 .stamp-grid img{
-    width:99px;
-    height:56px;
+    width:85%;
 
-    object-fit:cover;
+    max-width:260px;
+
+    height:auto;
 
     image-rendering:pixelated;
 
     border:1px solid #400;
-}
+    }
 
 /* overlapping corner image */
 
@@ -811,9 +818,13 @@ body::after{
             <div class="box">
                 <div class="title">notes.txt</div>
 
-                <div class="note">
-                    hi, i'm just someone who wants more freedom on what she can write and post..<br><br>
-                    my blogs might come off as disordered and disturbing here, sorry ..
+                <div class="scroll-note">
+                    i made this site as a personal archive and a space where i can write without feeling restricted by presentation, expectations, or the need to constantly filter myself into something easier to consume.
+
+this page mostly exists as a collection of thoughts, interests, visuals and things i couldn't comfortably place anywhere else. some entries may appear emotionally disorganized, unsettling or difficult to interpret at times. certain subjects discussed here can be heavy, disturbing or written impulsively depending on my state of mind while posting.<br><br>
+
+nothing here is intended to romanticize harm or encourage destructive behavior. please read responsibly and understand that this site functions more as an unfiltered personal documentation space than a curated blog...
+                    I'm sorry in advance (⁠´⁠;⁠︵⁠;⁠`⁠)
                 </div>
 
                 <div class="links">
@@ -910,9 +921,6 @@ discord
 
 </div>
             <div class="stamp-area">
-
-    <!-- overlapping image -->
-    <img src="assets/GIFs/WHATEVER.gif" class="corner-stamp">
 
     <!-- stamps -->
     <div class="stamp-grid">
