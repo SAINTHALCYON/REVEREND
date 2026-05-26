@@ -538,6 +538,106 @@ body::after{
 
     image-rendering:pixelated;
 }
+    /* ===== LINK ME ===== */
+
+.linkme-box{
+  width:100%;
+  margin-top:10px;
+
+  background:#111;
+  border:2px solid #500;
+
+  padding:8px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.link-title{
+  text-align:center;
+
+  font-size:9px;
+
+  margin-bottom:8px;
+
+  color:#ff4d4d;
+
+  text-shadow:0 0 4px red;
+}
+
+.link-sticker{
+  position:absolute;
+
+  top:-6px;
+  right:-8px;
+
+  width:55px;
+
+  transform:rotate(12deg);
+
+  pointer-events:none;
+}
+
+.border-wrap{
+  position:relative;
+
+  padding:10px;
+
+  background:#0a0a0a;
+
+  border:2px solid #400;
+}
+
+.border-wrap::before{
+  content:"";
+
+  position:absolute;
+
+  inset:-6px;
+
+  background:url("assets/images/DONOTCROSS.png") repeat;
+
+  background-size:80px;
+
+  opacity:0.9;
+
+  pointer-events:none;
+}
+
+.border-wrap > *{
+  position:relative;
+  z-index:2;
+}
+
+.site-button{
+  width:88px;
+  height:31px;
+
+  display:block;
+
+  margin:0 auto 8px auto;
+
+  image-rendering:pixelated;
+}
+
+.linkme-box textarea{
+  width:100%;
+
+  height:45px;
+
+  background:#000;
+
+  color:#ff4d4d;
+
+  border:1px solid #400;
+
+  resize:none;
+
+  font-size:7px;
+
+  font-family:monospace;
+}
 </style>
 </head>
 
@@ -603,6 +703,46 @@ body::after{
             </div>
 
         </div>
+        <!-- LINK ME BOX -->
+
+<div class="linkme-box">
+
+  <!-- STICKER -->
+
+  <img src="assets/images/RAZOR.webp" class="link-sticker">
+
+  <!-- TITLE -->
+
+  <div class="link-title">
+    LINK MY BUTTON
+  </div>
+
+  <!-- BORDER -->
+
+  <div class="border-wrap">
+
+    <!-- BUTTON -->
+
+    <a href="https://sainthalcyon.github.io/REVEREND/index.html" target="_blank">
+
+      <img
+        src="assets/gifs/REVEREND.gif"
+        class="site-button"
+      >
+
+    </a>
+
+    <!-- CODE -->
+
+    <textarea readonly>
+<a href="https://sainthalcyon.github.io/REVEREND/index.html">
+<img src="https://sainthalcyon.github.io/REVEREND/assets/gifs/REVEREND.gif">
+</a>
+    </textarea>
+
+  </div>
+
+</div>
 
         <!-- MIDDLE -->
 
