@@ -431,6 +431,8 @@ body::after{
         width:70px;
         height:70px;
     }
+    .tab{
+    text-decoration:none;
     }
 </style>
 </head>
@@ -451,8 +453,8 @@ body::after{
     </div>
 
     <div class="tabs">
-        <div class="tab">home</div>
-        <div class="tab">about</div>
+        <a href="index.html" class="tab">home</a>
+<a href="about.html" class="tab">about</a>
     </div>
 
     <div class="content">
@@ -614,6 +616,36 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
     audio.currentTime = audio.duration;
 });
+    <audio id="gunshot" preload="auto">
+  <source src="assets/audios/gunshot.mp3" type="audio/mpeg">
+</audio>
+    const gun = document.getElementById("gunshot");
+    window.addEventListener("load", () => {
+  gun.load();
+});
+    document.addEventListener("mousedown", () => {
+
+  gun.currentTime = 0;
+
+  gun.volume = 0.2;
+
+  gun.playbackRate = 3;
+
+  gun.play().catch(() => {});
+
+  document.body.style.transform =
+    "translateX(4px)";
+
+  setTimeout(() => {
+
+    document.body.style.transform =
+      "translateX(0px)";
+
+  }, 50);
+
+});
+    document.body.style.transform =
+"translateX(4px)";
 </script>
 </body>
 </html>
