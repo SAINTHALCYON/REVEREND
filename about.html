@@ -557,102 +557,131 @@ body::after{
     /* ===== LINK ME ===== */
 
 .linkme-box{
-  width:100%;
-  margin-top:10px;
+    width:100%;
 
-  background:#111;
-  border:2px solid #500;
+    margin-top:14px;
 
-  padding:8px;
+    background:#050505;
 
-  position:relative;
+    border:2px solid #700000;
 
-  overflow:hidden;
+    padding:12px;
+
+    position:relative;
+
+    overflow:visible; /* IMPORTANT */
+
+    min-height:220px; /* makes it taller */
 }
+
+/* title */
 
 .link-title{
-  text-align:center;
+    text-align:center;
 
-  font-size:9px;
+    font-size:18px;
 
-  margin-bottom:8px;
+    margin-bottom:12px;
 
-  color:#ff4d4d;
+    color:#ff3b3b;
 
-  text-shadow:0 0 4px red;
+    letter-spacing:2px;
+
+    text-shadow:0 0 6px red;
 }
+
+/* razor */
 
 .link-sticker{
-  position:absolute;
+    position:absolute;
 
-  top:-6px;
-  right:-8px;
+    top:-22px;
+    right:-28px;
 
-  width:55px;
+    width:110px;
 
-  transform:rotate(12deg);
+    z-index:50;
 
-  pointer-events:none;
+    transform:rotate(18deg);
+
+    pointer-events:none;
 }
+
+/* inside border */
 
 .border-wrap{
-  position:relative;
+    position:relative;
 
-  padding:10px;
+    padding:18px;
 
-  background:#0a0a0a;
+    background:#000;
 
-  border:2px solid #400;
+    border:2px solid #500;
+
+    min-height:170px;
 }
+
+/* caution tape */
 
 .border-wrap::before{
-  content:"";
+    content:"";
 
-  position:absolute;
+    position:absolute;
 
-  inset:-6px;
+    inset:-6px;
 
-  background:url("assets/images/DONOTCROSS.png") repeat;
+    background:url("assets/images/DONOTCROSS.png") repeat;
 
-  background-size:80px;
+    background-size:110px;
 
-  opacity:0.9;
+    opacity:0.95;
 
-  pointer-events:none;
+    pointer-events:none;
 }
+
+/* keep contents above tape */
 
 .border-wrap > *{
-  position:relative;
-  z-index:2;
+    position:relative;
+    z-index:2;
 }
+
+/* button */
 
 .site-button{
-  width:88px;
-  height:31px;
+    width:140px;
 
-  display:block;
+    height:auto;
 
-  margin:0 auto 8px auto;
+    display:block;
 
-  image-rendering:pixelated;
+    margin:0 auto 14px auto;
+
+    image-rendering:pixelated;
 }
 
+/* textarea */
+
 .linkme-box textarea{
-  width:100%;
+    width:100%;
 
-  height:45px;
+    height:70px;
 
-  background:#000;
+    background:#050505;
 
-  color:#ff4d4d;
+    color:#ff4d4d;
 
-  border:1px solid #400;
+    border:1px solid #700000;
 
-  resize:none;
+    resize:none;
 
-  font-size:7px;
+    padding:8px;
 
-  font-family:monospace;
+    font-size:10px;
+
+    line-height:1.3;
+
+    font-family:monospace;
 }
     /* ===== STAMP AREA ===== */
 
