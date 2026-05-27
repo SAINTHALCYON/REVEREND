@@ -1,0 +1,1022 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>REVEREND</title>  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">  <style>  
+  
+/* ===== GLOBAL ===== */  
+  
+body {  
+  background: #000 url("nekoneko.gif") repeat;  
+  font-family: 'Press Start 2P', monospace;  
+  margin: 0;  
+  font-size: 10px;  
+  -webkit-font-smoothing: none;  
+  color: white;  
+  overflow-x: hidden;  
+}  
+  
+:root {  
+  --border: #2a2a2a;  
+  --red-dark: #5e0000;  
+  --red-main: #8b0000;  
+  --red-light: #c40000;  
+}  
+  
+/* ===== CRT OVERLAY ===== */  
+  
+body::before {  
+  content: "";  
+  position: fixed;  
+  inset: 0;  
+  background: repeating-linear-gradient(  
+    to bottom,  
+    rgba(255,255,255,0.03),  
+    rgba(255,255,255,0.03) 1px,  
+    transparent 1px,  
+    transparent 2px  
+  );  
+  pointer-events: none;  
+  z-index: 9999;  
+}  
+  
+/* ===== PAGE ===== */  
+  
+#page {  
+  width: 1000px;  
+  margin: 20px auto;  
+  background: #111;  
+  box-shadow: 0 0 20px black;  
+}  
+  
+/* ===== HEADER ===== */  
+  
+#header {  
+  height: 170px;  
+  border-bottom: 3px solid var(--border);  
+}  
+  
+#header img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: cover;  
+}  
+  
+/* ===== LAYOUT ===== */  
+  
+#main {  
+  display: grid;  
+  grid-template-columns: 200px 600px 200px;  
+}  
+  
+#left,  
+#right {  
+  background: #161616;  
+  padding: 8px;  
+}  
+  
+#left {  
+  border-right: 3px solid var(--border);  
+}  
+  
+#right {  
+  border-left: 3px solid var(--border);  
+}  
+#center {  
+  background: #f5f5f5;  
+  padding: 10px;  
+  color: black;  
+}  
+  
+/* ===== NAVIGATION ===== */  
+  
+.nav-category {  
+  background: #0d0d0d;  
+  color: white;  
+  border: 2px solid var(--red-dark);  
+  padding: 6px;  
+  margin-bottom: 6px;  
+  text-align: center;  
+  font-size: 9px;  
+}  
+  
+.navbutton {  
+  display: block;  
+  background: var(--red-main);  
+  border: 2px solid var(--border);  
+  margin-bottom: 8px;  
+  padding: 6px;  
+  text-align: center;  
+  font-size: 9px;  
+  text-decoration: none;  
+  color: white;  
+  transition: 0.2s;  
+}  
+  
+.navbutton:hover {  
+  background: var(--red-light);  
+  transform: scale(1.03);  
+}  
+  
+.nav-tree {  
+  background: #0d0d0d;  
+  border: 2px solid var(--red-dark);  
+  padding: 8px;  
+  color: #e8e8e8;  
+  line-height: 1.8;  
+  font-size: 8px;  
+}  
+  
+.nav-tree a {  
+  color: #ff4d4d;  
+  text-decoration: none;  
+}  
+  
+.nav-tree a:hover {  
+  color: white;  
+  text-shadow: 0 0 4px red;  
+}  
+  
+/* ===== BOXES ===== */  
+.box {  
+  border: 3px double var(--border);  
+  padding: 8px;  
+  background: white;  
+  color: black;  
+  font-size: 9px;  
+  line-height: 1.8;  
+  margin-bottom: 8px;  
+}  
+  
+.cute-border {  
+  border: 3px solid black;  
+}  
+  
+/* ===== DIVIDERS ===== */  
+  
+.divider {  
+  margin: 8px 0;  
+  text-align: center;  
+}  
+  
+.divider img {  
+  max-width: 90%;  
+}  
+  
+  /* ===== STATUS BOX ===== */  
+  
+.statusbox {  
+  background: #111;  
+  color: white;  
+  border: 2px solid #000;  
+  padding: 10px;  
+}  
+  
+.status-top {  
+  display: flex;  
+  align-items: center;  
+  gap: 10px;  
+}  
+  
+.status-icon img {  
+  width: 50px;  
+  height: 50px;  
+  object-fit: cover;  
+  border: 2px solid #300;  
+}  
+  
+.status-title {  
+  color: #ff4d4d;  
+  margin-bottom: 6px;  
+  text-shadow: 0 0 4px red;  
+}  
+  
+.status-message {  
+  line-height: 1.7;  
+  color: #ddd;  
+}  
+  
+/* ===== UPDATE CARDS ===== */  
+  
+.updates-wrap {  
+  margin-top: 10px;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 8px;  
+}  
+  
+.update-card {  
+  background: white;  
+  border-radius: 12px;  
+  padding: 10px;  
+  border: 2px solid #ccc;  
+  color: black;  
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);  
+  transition: 0.2s;  
+}  
+  
+.update-card:hover {  
+  transform: translateX(4px);  
+}  
+  
+.update-time {  
+  color: darkred;  
+  margin-bottom: 6px;  
+}  
+  
+/* ===== STAMPS ===== */  
+  
+#stamps {  
+  margin-top: 8px;  
+  overflow: hidden;  
+  border: 2px solid var(--border);  
+  padding: 6px;  
+  background: #111;  
+  white-space: nowrap;  
+  position: relative;  
+  height: 52px;  
+}  
+  
+.stamp-track {  
+  display: flex;  
+  width: max-content;  
+  animation: scrollStamps 20s linear infinite;  
+}  
+  
+@keyframes scrollStamps {  
+  from {  
+    transform: translateX(0);  
+  }  
+  
+  to {  
+    transform: translateX(-50%);  
+  }  
+}  
+  
+.stamp {  
+  flex: 0 0 auto;  
+  width: 120px;  
+  height: 40px;  
+}  
+  
+.stamp img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: cover;  
+}  
+  
+@keyframes scrollStamps {  
+  
+  0% {  
+    transform: translateX(0);  
+  }  
+  
+  100% {  
+    transform: translateX(-50%);  
+  }  
+  
+}  
+.stamp {  
+  display: inline-block;  
+  width: 120px;  
+  height: 40px;  
+  margin-right: 4px;  
+}  
+  
+.stamp img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: cover;  
+}  
+  
+/* ===== BLINKIES ===== */  
+  
+#blinkies {  
+  margin-top: 8px;  
+  text-align: center;  
+}  
+  
+#blinkies img {  
+  margin: 2px;  
+  height: 20px;  
+}  
+  
+/* ===== MUSIC PLAYER ===== */  
+  
+#music-player {  
+  margin-top: 10px;  
+  padding: 10px;  
+  border: 2px solid var(--border);  
+  background: linear-gradient(#1a1a1a, #3b0000);  
+  text-align: center;  
+  color: white;  
+}  
+  
+.now-playing {  
+  margin-bottom: 8px;  
+  font-size: 9px;  
+  animation: redShift 5s linear infinite;  
+}  
+  
+@keyframes redShift {  
+  
+  0% {  
+    color: #ff4d4d;  
+  }  
+  
+  50% {  
+    color: white;  
+  }  
+  
+  100% {  
+    color: #ff4d4d;  
+  }  
+  
+}  
+  
+#music-player button {  
+  font-family: 'Press Start 2P', monospace;  
+  font-size: 9px;  
+  padding: 4px 10px;  
+  background: linear-gradient(#8b0000, #c40000);  
+  border: 2px solid var(--border);  
+  color: white;  
+  cursor: pointer;  
+}  
+  
+#music-player button:hover {  
+  filter: brightness(1.2);  
+}  
+  
+/* ===== FLOATING IMAGE ===== */  
+  
+.floatie {  
+  position: fixed;  
+  bottom: 10px;  
+  right: 10px;  
+  width: 120px;  
+  z-index: 999;  
+  pointer-events: none;  
+}  
+/* ===== LINK ME ===== */  
+  
+.linkme-box {  
+  position: relative;  
+  width: 100%;  
+  box-sizing: border-box;  
+  background: #111;  
+  border: 2px solid #500;  
+  padding: 8px;  
+  margin-top: 10px;  
+  overflow: hidden;  
+}  
+  
+/* FLASHING TITLE */  
+  
+.link-title {  
+  text-align: center;  
+  font-size: 9px;  
+  margin-bottom: 8px;  
+  font-weight: bold;  
+  letter-spacing: 1px;  
+}  
+  
+/* STICKER */  
+  
+.link-sticker {  
+  position: absolute;  
+  top: -6px;  
+  right: -8px;  
+  width: 55px;  
+  transform: rotate(12deg);  
+  z-index: 5;  
+  pointer-events: none;  
+}  
+  
+/* WRAPPED BORDER */  
+  
+.border-wrap {  
+  position: relative;  
+  padding: 10px;  
+  background: #0a0a0a;  
+  border: 2px solid #400;  
+}  
+  
+.border-wrap::before {  
+  content: "";  
+  position: absolute;  
+  inset: -6px;  
+  pointer-events: none;  
+  background: url("assets/images/DONOTCROSS.png") repeat;  
+  background-size: 80px;  
+  opacity: 0.9;  
+  z-index: 0;  
+}  
+  
+.border-wrap > * {  
+  position: relative;  
+  z-index: 2;  
+  }  
+  
+/* BUTTON */  
+  
+.site-button {  
+  width: 88px;  
+  height: 31px;  
+  display: block;  
+  margin: 0 auto 8px auto;  
+  image-rendering: pixelated;  
+}  
+  
+/* CODE BOX */  
+  
+.linkme-box textarea {  
+  width: 100%;  
+  height: 45px;  
+  background: #000;  
+  color: #ff4d4d;  
+  border: 1px solid #400;  
+  resize: none;  
+  font-size: 7px;  
+  font-family: monospace;  
+  overflow: auto;  
+}  
+/* ===== SCROLLBAR ===== */  
+  
+::-webkit-scrollbar {  
+  width: 8px;  
+}  
+  
+::-webkit-scrollbar-track {  
+  background: #111;  
+}  
+  
+::-webkit-scrollbar-thumb {  
+  background: #600;  
+}  
+/* ===== MOBILE FIX ===== */  
+  
+@media (max-width: 900px) {  
+  
+  body {  
+    overflow-x: auto;  
+  }  
+  
+  #page {  
+    width: 1000px;  
+    margin: 0;  
+  }  
+  
+}  
+  
+  .linkme-box {  
+    width: 100%;  
+    margin-top: 10px;  
+  }  
+  
+}  
+.link-title {  
+  text-align: center;  
+  font-size: 9px;  
+  margin-bottom: 8px;  
+  font-weight: bold;  
+  letter-spacing: 1px;  
+  color: #ff4d4d;  
+  text-shadow: 0 0 4px red;  
+}  
+  /* ===== CHATBOX ===== */  
+  
+#chatbox {  
+  margin-top: 10px;  
+  background: #111;  
+  border: 2px solid #500;  
+  color: white;  
+  overflow: hidden;  
+}  
+  
+/* HEADER */  
+  
+.chat-header {  
+  background: linear-gradient(#400, #111);  
+  padding: 8px;  
+  text-align: center;  
+  font-size: 9px;  
+  border-bottom: 2px solid #300;  
+  color: #ff4d4d;  
+  text-shadow: 0 0 4px red;  
+}  
+  
+/* MESSAGES */  
+  
+#chat-messages {  
+  height: 250px;  
+  overflow-y: auto;  
+  padding: 8px;  
+  background: #0b0b0b;  
+}  
+  
+/* SINGLE MESSAGE */  
+  
+.chat-message {  
+  display: flex;  
+  gap: 6px;  
+  margin-bottom: 10px;  
+  align-items: flex-start;  
+}  
+  
+/* PFP */  
+  
+.chat-pfp {  
+  width: 35px;  
+  height: 35px;  
+  object-fit: cover;  
+  border: 2px solid #500;  
+  image-rendering: pixelated;  
+}  
+  
+/* BUBBLE */  
+  
+.chat-bubble {  
+  background: #1a1a1a;  
+  border: 1px solid #400;  
+  padding: 6px;  
+  font-size: 8px;  
+  line-height: 1.6;  
+  max-width: 120px;  
+  word-wrap: break-word;  
+}  
+  
+/* USERNAME */  
+  
+.chat-user {  
+  color: #ff4d4d;  
+  margin-bottom: 4px;  
+}  
+  
+/* INPUT AREA */  
+  
+.chat-input-wrap {  
+  display: flex;  
+  border-top: 2px solid #300;  
+}  
+  
+/* INPUT */  
+  
+#chatInput {  
+  flex: 1;  
+  background: black;  
+  border: none;  
+  color: white;  
+  padding: 8px;  
+  font-family: 'Press Start 2P', monospace;  
+  font-size: 8px;  
+  outline: none;  
+}  
+  
+/* BUTTON */  
+  
+.chat-input-wrap button {  
+  background: #600;  
+  color: white;  
+  border: none;  
+  padding: 8px;  
+  font-size: 8px;  
+  font-family: 'Press Start 2P', monospace;  
+}  
+  
+/* EMOJI BAR */  
+  
+.emoji-bar {  
+  display: flex;  
+  gap: 4px;  
+  padding: 6px;  
+  border-top: 2px solid #300;  
+  background: #151515;  
+}  
+  
+/* CUSTOM GIF EMOJIS */  
+  
+.emoji-bar img {  
+  width: 24px;  
+  height: 24px;  
+  cursor: pointer;  
+  image-rendering: pixelated;  
+}  
+  
+.emoji-bar img:hover {  
+  transform: scale(1.1);  
+}  
+  
+/* SCROLLBAR */  
+  
+#chat-messages::-webkit-scrollbar {  
+  width: 6px;  
+}  
+  
+#chat-messages::-webkit-scrollbar-thumb {  
+  background: #600;  
+    }  
+</style>  </head>  <body>  <div id="page">  <!-- ===== HEADER ===== -->  <div id="header">  
+<img src="assets/gifs/KILLTHISFREAK.gif">  
+</div>  <div id="main">  <!-- ===== LEFT ===== -->  <div id="left">  <img src="assets/images/SS1.jpg" width="100%">  <div class="divider">  
+<img src="assets/images/BAND.jpg" width="100%">  
+</div>  
+<!-- ===== CHATBOX ===== -->  <div id="chatbox">    <!-- HEADER -->    <div class="chat-header">  
+    MESSAGE BOARD  
+  </div>    <!-- MESSAGES -->    <div id="chat-messages"></div>    <!-- EMOJIS -->    <div class="emoji-bar">  <img src="assets/gifs/ANGRY.gif"  
+onclick="addEmoji(':ANGRY:')">  
+
+<img src="assets/gifs/LOVE.gif"  
+onclick="addEmoji(':LOVE:')">  
+
+<img src="assets/gifs/LOL.gif"  
+onclick="addEmoji(':LOL:')">
+
+  </div>    <!-- INPUT -->    <div class="chat-input-wrap">  <input  
+  type="text"  
+  id="chatInput"  
+  placeholder="type message..."  
+  maxlength="120"  
+>  
+
+<button onclick="sendMessage()">  
+  SEND  
+</button>
+
+  </div>  </div>  
+</div>  <!-- ===== CENTER ===== -->  <div id="center">  <div class="box cute-border">  A SAD ASS WEBSITE DEDICATED TO ART, RESEARCH,<br>
+AND MEDIA FIXATION WHICH IS SNCA.<br><br>
+
+THIS WEBSITE MAY CONTAIN MATURE THEMES,
+DISTURBING SUBJECT MATTER, NSFW CONTENT,
+AND OTHER MATERIAL UNSUITABLE FOR SOME AUDIENCES.<br>
+VIEWER DISCRETION IS ADVISED.<br><br>
+
+<span id="typing"></span>
+
+</div>  <div class="divider">  
+<img src="assets/images/BAND.jpg">  
+</div>  <!-- ===== STATUS BOX ===== -->  <div class="box statusbox">  <div class="status-top">  <div class="status-icon">  
+<img src="assets/gifs/BANDAGE.gif">  
+</div>  <div class="status-text">  <div class="status-title">  
+═╬   MLYST   ⛌  
+</div>  <div class="status-message">  
+drawing requests.. i have nothing good to do with my life</div>  </div>  </div>  </div>  <!-- ===== UPDATES ===== -->  <div class="updates-wrap">  <div class="update-card">  
+<div class="update-time">[05/26/2026]</div>  
+ADDED THE ABOUT ME PAGE  
+</div>  
+</div>  <div id="stamps">  <div class="stamp-track">    <!-- ORIGINAL -->    <div class="stamp"><img src="assets/stamps/KMFDMSB.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/KILLTHEMALL.jpg"></div>  
+  <div class="stamp"><img src="assets/stamps/STRIPE.jpg"></div>  
+  <div class="stamp"><img src="assets/stamps/KMFDM.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/HAHAHA.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/GWFMG.jpg"></div>  
+  <div class="stamp"><img src="assets/stamps/NERV.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/NRV.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/IWYT.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/FUCKOFF.gif"></div>    <!-- DUPLICATE -->    <div class="stamp"><img src="assets/stamps/KMFDMSB.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/KILLTHEMALL.jpg"></div>  
+  <div class="stamp"><img src="assets/stamps/STRIPE.jpg"></div>  
+  <div class="stamp"><img src="assets/stamps/KMFDM.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/HAHAHA.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/GWFMG.jpg"></div>  
+  <div class="stamp"><img src="assets/stamps/NERV.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/NRV.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/IWYT.gif"></div>  
+  <div class="stamp"><img src="assets/stamps/FUCKOFF.gif"></div>  </div>  
+</div>  <div id="blinkies">  
+<img src="assets/blinkies/blinkie1.gif">  
+<img src="assets/blinkies/blinkie2.gif">  
+<img src="assets/blinkies/blinkie3.gif">  
+</div>  <div id="music-player">  <div class="now-playing">  
+NOW PLAYING: HATE  
+</div>  <audio id="audio">  
+<source src="assets/audios/HATE.mp3" type="audio/mpeg">  
+</audio>  <button onclick="toggleMusic()">  
+▶ PLAY / ❚❚ PAUSE  
+</button>  </div>  </div>  <!-- ===== RIGHT ===== -->  <div id="right">  <div class="nav-category">  
+HOME  
+</div>  <a href="index.html" class="navbutton">  
+MAIN PAGE  
+</a>  <div class="nav-tree">  ├── BLOG<br>
+│    ├── <a href="diary.html">DIARY</a><br>
+│    └── <a href="medialog.html">MEDIA LOG</a><br><br>
+
+├── GALLERY<br>
+│    ├── <a href="digitalart.html">DIGITAL ART</a><br>
+│    ├── <a href="photography.html">PHOTOGRAPHY</a><br>
+│    └── <a href="sketches.html">SKETCHES</a><br><br>
+
+├── ARCHIVE<br>
+│    ├── <a href="research.html">RESEARCH SUBJECTS</a><br>
+│    ├── <a href="timelines.html">TIMELINES</a><br>
+│    ├── <a href="documents.html">DOCUMENTS</a><br>
+│    └── <a href="references.html">REFERENCES</a><br><br>
+
+└── EXTRAS<br>
+     ├── <a href="guestbook.html">GUESTBOOK</a><br>
+     ├── <a href="links.html">LINKS</a><br>
+     └── <a href="about.html">ABOUT ME</a>
+
+</div>  
+  <!-- LINK ME BOX -->  <div class="linkme-box">    <!-- STICKER -->    <img src="assets/images/RAZOR.webp" class="link-sticker">    <!-- TITLE -->    <div class="link-title" id="linkTitle">  
+    LINK MY BUTTON  
+  </div>    <!-- BORDER WRAP -->    <div class="border-wrap">  <!-- BUTTON -->  
+
+<a href="https://sainthalcyon.github.io/REVEREND/index.html" target="_blank">  
+  <img src="assets/gifs/REVEREND.gif" class="site-button">  
+</a>  
+
+<!-- CODE -->  
+
+<textarea readonly>
+
+<a href="https://sainthalcyon.github.io/REVEREND/index.html">  
+<img src="https://sainthalcyon.github.io/REVEREND/assets/gifs/REVEREND.gif">  
+</a>  
+    </textarea>    </div>  </div>  </div>  
+</div>  <!-- ===== AUDIO ===== -->  <audio id="gunshot" preload="auto">  
+  <source src="assets/audios/gunshot.mp3" type="audio/mpeg">  
+</audio>  
+<script>  
+window.addEventListener("load", () => {  
+  gun.load();  
+});  
+</script>  
+  <script type="module">  import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+onSnapshot,
+query,
+orderBy
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+getAuth,
+signInAnonymously
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* ===== FIREBASE ===== */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAn9ZE0gwwT_yGuSLKQDgta9PVJKAZEB_I",
+authDomain: "reverend-38f43.firebaseapp.com",
+projectId: "reverend-38f43",
+storageBucket: "reverend-38f43.firebasestorage.app",
+messagingSenderId: "451665096761",
+appId: "1:451665096761:web:add05192d153a984725de8"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+signInAnonymously(auth);
+
+/* ===== AUDIO ===== */
+
+const audio = document.getElementById("audio");
+const gun = document.getElementById("gunshot");
+
+window.addEventListener("load", () => {
+gun.load();
+});
+
+/* ===== MUSIC PLAYER ===== */
+
+window.toggleMusic = function () {
+
+audio.paused
+? audio.play()
+: audio.pause();
+
+};
+
+/* ===== GUNSHOT ===== */
+
+document.addEventListener("mousedown", () => {
+
+gun.currentTime = 0;
+
+gun.volume = 0.2;
+
+gun.playbackRate = 3;
+
+gun.play().catch(() => {});
+
+document.body.style.transform =
+"translateX(4px)";
+
+setTimeout(() => {
+
+document.body.style.transform =  
+  "translateX(0px)";
+
+}, 50);
+
+});
+
+/* ===== TYPING ===== */
+
+const text = "not that i give a shit";
+
+const typing =
+document.getElementById("typing");
+
+let i = 0;
+
+setTimeout(() => {
+
+const interval = setInterval(() => {
+
+typing.innerHTML =  
+  text.substring(0, i) +  
+  '<span style="opacity:0.5">...</span>';  
+
+i++;  
+
+if (i > text.length) {  
+
+  clearInterval(interval);  
+
+  setInterval(() => {  
+
+    typing.innerHTML =  
+      text +  
+      (typing.innerHTML.endsWith("...")  
+        ? ""  
+        : "...");  
+
+  }, 500);  
+
+}
+
+}, 80);
+
+}, 2000);
+
+/* ===== CHATBOX ===== */
+
+const chatInput =
+document.getElementById("chatInput");
+
+const messages =
+document.getElementById("chat-messages");
+
+/* USERNAME */
+
+if (!localStorage.getItem("username")) {
+
+alert(
+"WARNING:\nUsername can only be set once."
+);
+
+const username =
+prompt("ENTER USERNAME");
+
+localStorage.setItem(
+"username",
+username || "ANON"
+);
+
+}
+
+/* EMOJIS */
+
+window.addEmoji = function (emoji) {
+
+chatInput.value += " " + emoji;
+
+};
+
+/* CONVERT EMOJIS */
+
+function convertEmojis(text) {
+
+return text
+
+.replaceAll(  
+  ":ANGRY:",  
+  '<img src="assets/gifs/ANGRY.gif" width="20">'  
+)  
+
+.replaceAll(  
+  ":LOVE:",  
+  '<img src="assets/gifs/LOVE.gif" width="20">'  
+)  
+
+.replaceAll(  
+  ":LOL:",  
+  '<img src="assets/gifs/LOL.gif" width="20">'  
+);  
+
+}
+
+/* LOAD MESSAGES */
+
+const q = query(
+collection(db, "messages"),
+orderBy("time")
+);
+
+onSnapshot(q, (snapshot) => {
+
+messages.innerHTML = "";
+
+snapshot.forEach((doc) => {
+
+const data = doc.data();  
+
+const div =  
+  document.createElement("div");  
+
+div.className = "chat-message";  
+
+div.innerHTML = `  
+
+  <img src="${data.pfp}"  
+  class="chat-pfp">  
+
+  <div class="chat-bubble">  
+
+    <div class="chat-user">  
+      ${data.username}  
+    </div>  
+
+    ${convertEmojis(
+
+data.text
+.replace(/</g, "<")
+.replace(/>/g, ">")
+)}
+
+</div>  
+
+`;  
+
+messages.appendChild(div);
+
+});
+
+messages.scrollTop =
+messages.scrollHeight;
+
+});
+
+/* SEND MESSAGE */
+
+window.sendMessage = async function () {
+
+if (!chatInput.value.trim()) return;
+
+await addDoc(
+collection(db, "messages"),
+{
+
+username:  
+    localStorage.getItem("username")  
+    || "ANON",  
+
+  pfp:  
+    localStorage.getItem("pfp")  
+    || "assets/images/defaultpfp.jpg",  
+
+  text: chatInput.value,  
+
+  time: Date.now()  
+
+}
+
+);
+
+chatInput.value = "";
+
+};
+
+/* ENTER KEY */
+
+chatInput.addEventListener(
+"keypress",
+(e) => {
+
+if (e.key === "Enter") {  
+
+  sendMessage();  
+
+}
+
+}
+);
+
+  </script>  </body>  
+</html>
