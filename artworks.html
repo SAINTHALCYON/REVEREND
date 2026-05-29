@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DIGITAL ART — REVEREND</title>
+
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ===== BODY ===== */
+
+body{
+    background:#000;
+    color:white;
+    font-family:'VT323', monospace;
+    overflow-x:hidden;
+}
+
+/* ===== BACKGROUND ===== */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url("assets/gifs/nekoneko.gif") repeat;
+    opacity:0.12;
+    z-index:-2;
+}
+
+/* ===== CRT ===== */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+
+    pointer-events:none;
+    z-index:9999;
+}
+
+/* ===== PAGE ===== */
+
+#page{
+    width:1100px;
+    margin:20px auto;
+    background:#111;
+    border:3px solid #222;
+    box-shadow:0 0 25px black;
+}
+
+/* ===== HEADER ===== */
+
+#header{
+    height:180px;
+    overflow:hidden;
+    border-bottom:3px solid #222;
+}
+
+#header img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* ===== LAYOUT ===== */
+
+#main{
+    display:grid;
+    grid-template-columns:220px 1fr 260px;
+}
+
+/* ===== SIDES ===== */
+
+#left,
+#right{
+    background:#151515;
+    padding:10px;
+}
+
+#left{
+    border-right:3px solid #222;
+}
+
+#right{
+    border-left:3px solid #222;
+}
+
+/* ===== CENTER ===== */
+
+#center{
+    background:#efefef;
+    color:black;
+    padding:12px;
+
+    min-width:0;
+}
+
+/* ===== NAV ===== */
+
+.nav-title{
+    background:#000;
+    border:2px solid #500;
+    color:#ff4d4d;
+    text-align:center;
+    padding:8px;
+    margin-bottom:8px;
+    font-size:24px;
+}
+
+.nav-btn{
+    display:block;
+    background:#700000;
+    color:white;
+    text-decoration:none;
+    padding:8px;
+    margin-bottom:8px;
+    border:2px solid #222;
+    text-align:center;
+    font-size:18px;
+    transition:0.2s;
+}
+
+.nav-btn:hover{
+    background:#a00000;
+    transform:translateX(4px);
+}
+
+/* ===== TREE ===== */
+
+.nav-tree{
+    background:#0d0d0d;
+    border:2px solid #500;
+    padding:10px;
+    line-height:1.7;
+    font-size:18px;
+}
+
+.nav-tree a{
+    color:#ff4d4d;
+    text-decoration:none;
+}
+
+.nav-tree a:hover{
+    color:white;
+}
+
+/* ===== TITLE ===== */
+
+.gallery-title{
+    font-size:42px;
+    border-bottom:2px solid #999;
+    margin-bottom:14px;
+    padding-bottom:6px;
+}
+
+/* ===== VIEWER ===== */
+
+.viewer{
+    width:100%;
+    height:520px;
+    background:black;
+    border:3px solid #111;
+    overflow:hidden;
+    margin-bottom:14px;
+}
+
+.viewer img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+/* ===== SCROLL GALLERY ===== */
+
+.gallery-scroll-wrapper{
+
+    width:100%;
+
+    max-width:100%;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    border:2px solid #111;
+
+    background:#0d0d0d;
+
+    padding:10px;
+}
+
+/* ===== HORIZONTAL TRACK ===== */
+
+.thumb-scroll{
+
+    display:flex;
+
+    gap:10px;
+
+    width:max-content;
+}
+
+/* ===== THUMB ===== */
+
+.thumb{
+
+    width:180px;
+
+    min-width:180px;
+
+    height:140px;
+
+    flex-shrink:0;
+
+    background:black;
+
+    border:2px solid #500;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.thumb:hover{
+    border-color:red;
+    transform:translateY(-4px);
+}
+
+.thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ===== SCROLLBAR ===== */
+
+.gallery-scroll-wrapper::-webkit-scrollbar{
+    height:8px;
+}
+
+.gallery-scroll-wrapper::-webkit-scrollbar-thumb{
+    background:#700000;
+}
+
+.gallery-scroll-wrapper::-webkit-scrollbar-track{
+    background:#111;
+}
+
+/* ===== INFO BOX ===== */
+
+.info-box{
+    background:#090909;
+    border:2px solid #500;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+.info-title{
+    color:#ff4d4d;
+    border-bottom:1px solid #400;
+    padding-bottom:4px;
+    margin-bottom:8px;
+    font-size:22px;
+}
+
+.info-text{
+    font-size:18px;
+    line-height:1.6;
+    color:#ddd;
+}
+
+/* ===== STAMPS ===== */
+
+.stamps{
+    margin-top:10px;
+    text-align:center;
+}
+
+.stamps img{
+    width:88px;
+    margin:2px;
+    image-rendering:pixelated;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:1100px){
+
+    body{
+        overflow-x:auto;
+    }
+
+    #page{
+        width:1100px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="page">
+
+<!-- ===== HEADER ===== -->
+
+<div id="header">
+
+<img src="assets/gifs/KILLTHISFREAK.gif">
+
+</div>
+
+<div id="main">
+
+<!-- ===== LEFT ===== -->
+
+<div id="left">
+
+<div class="nav-title">
+NAVIGATION
+</div>
+
+<a href="index.html" class="nav-btn">
+HOME
+</a>
+
+<div class="nav-tree">
+
+├── BLOG<br>
+│ ├── <a href="diary.html">DIARY</a><br>
+│ └── <a href="medialog.html">MEDIA LOG</a><br><br>
+
+├── GALLERY<br>
+│ ├── <a href="artworks.html">ARTWORKS/a><br>
+│ ├── <a href="photography.html">PHOTOGRAPHY</a><br>
+│ └── <a href="sketches.html">SKETCHES</a><br><br>
+
+├── ARCHIVE<br>
+│ ├── <a href="research.html">RESEARCH SUBJECTS</a><br>
+│ ├── <a href="timelines.html">TIMELINES</a><br>
+│ ├── <a href="documents.html">DOCUMENTS</a><br>
+│ └── <a href="references.html">REFERENCES</a><br><br>
+
+└── EXTRAS<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ├── <a href="links.html">LINKS</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; └── <a href="about.html">ABOUT ME</a>
+
+</div>
+
+</div>
+
+<!-- ===== CENTER ===== -->
+
+<div id="center">
+
+<div class="gallery-title">
+ARTWORKS
+</div>
+
+<!-- ===== MAIN IMAGE ===== -->
+
+<div class="viewer">
+
+<img
+id="mainImage"
+src="assets/art/IWISHTHATWASME.png">
+
+</div>
+
+<!-- ===== SCROLLABLE GALLERY ===== -->
+
+<div class="gallery-scroll-wrapper">
+
+<div class="thumb-scroll">
+
+<!-- ART 1 -->
+
+<div class="thumb"
+onclick="changeArt(
+'assets/art/IWISHTHATWASME.png',
+'ERIC HARRIS',
+'05/24/2026 / PERSONAL WORK'
+)">
+<img src="assets/art/IWISHTHATWASME.png">
+</div>
+
+<!-- ART 2 -->
+
+<div class="thumb"
+onclick="changeArt(
+'assets/art/DYLAN1.png',
+'DYLAN KLEBOLD',
+'05/25/2026 / REQUESTED'
+)">
+<img src="assets/art/DYLAN1.png">
+</div>
+
+<!-- ART 3 -->
+
+<div class="thumb"
+onclick="changeArt(
+'assets/art/BUSTAINMAPANTE.png',
+'ALYSSA BUSTAMANTE',
+'26/05/2026 / REQUESTED '
+)">
+<img src="assets/art/BUSTAINMAPANTE.png">
+</div>
+
+<!-- ART 4 -->
+
+<div class="thumb"
+onclick="changeArt(
+'assets/art/EXPERIMENT.png',
+'ERIC HARRIS',
+'05/28/2026 / PERSONAL WORK / does this even look like him?'
+)">
+<img src="assets/art/EXPERIMENT.png">
+</div>
+
+<!-- ART 5 -->
+
+<div class="thumb"
+onclick="changeArt(
+'assets/art/ROOFING.jpg',
+'DYLANN ROOF',
+'05/28/2026 / REQUESTED / too lazy to finish this.'
+)">
+<img src="assets/art/ROOFING.jpg">
+</div>
+
+<!-- ART 6 -->
+
+<div class="thumb"
+onclick="changeArt(
+'assets/art/someone.png',
+'someone',
+'12/22/2025 / PERSONAL WORK / i don't remember the original date i started this. i wish we stayed that way
+)">
+<img src="assets/art/someone.png">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== RIGHT ===== -->
+
+<div id="right">
+
+<div class="info-box">
+
+<div class="info-title">
+NOTES
+</div>
+
+<div class="info-text">
+
+CATALOGUE OF MY WORKS<br><br>
+
+Most of my older work isn't archived here because I don't really like the style anymore and feel they don't represent me well. 
+
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="info-title">
+CURRENT FILE
+</div>
+
+<div
+class="info-text"
+id="artInfo">
+
+#<br><br>
+
+CLICK AN ARTWORK
+
+</div>
+
+</div>
+
+<div class="stamps">
+
+<img src="assets/stamps/NERV.gif">
+<img src="assets/stamps/KMFDM.gif">
+<img src="assets/stamps/HAHAHA.gif">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== SCRIPT ===== -->
+
+<script>
+
+function changeArt(image, title, desc){
+
+    document.getElementById(
+    "mainImage"
+    ).src = image;
+
+    document.getElementById(
+    "artInfo"
+    ).innerHTML = `
+    ${title}<br><br>${desc}
+    `;
+}
+
+</script>
+
+</body>
+</html>
