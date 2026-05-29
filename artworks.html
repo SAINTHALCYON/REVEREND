@@ -525,7 +525,18 @@ CLICK AN ARTWORK
 
 <!-- ===== SCRIPT ===== -->
 
+</script>
+<!-- ===== AUDIO ===== -->
+
+<audio id="gunshot" preload="auto">
+  <source src="assets/audios/gunshot.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== SCRIPT ===== -->
+
 <script>
+
+/* ===== CHANGE ART ===== */
 
 function changeArt(image, title, desc){
 
@@ -540,7 +551,36 @@ function changeArt(image, title, desc){
     `;
 }
 
+/* ===== GUNSHOT ===== */
+
+const gun =
+document.getElementById("gunshot");
+
+document.addEventListener("mousedown", () => {
+
+    gun.currentTime = 0;
+
+    gun.volume = 0.2;
+
+    gun.playbackRate = 3;
+
+    gun.play().catch(() => {});
+
+    document.body.style.transform =
+    "translateX(4px)";
+
+    setTimeout(() => {
+
+        document.body.style.transform =
+        "translateX(0px)";
+
+    }, 50);
+
+});
+
 </script>
 
+</body>
+</html>
 </body>
 </html>
